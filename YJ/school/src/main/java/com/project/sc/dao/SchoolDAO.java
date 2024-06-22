@@ -11,9 +11,12 @@ import com.project.sc.vo.SchoolVO;
 
 @Mapper
 @Repository("SchoolDAO")
-public interface SchoolDAO {
+public interface SchoolDAO<board> {
 	public SchoolVO loginById(SchoolVO schoolVO) throws DataAccessException;
 	public List<SchoolVO> selectAllmain() throws DataAccessException;
 	public List<SchoolVO> selectAlladminMain() throws DataAccessException;
+	public List<SchoolVO> selectAllboard() throws DataAccessException;
+	public SchoolVO selectAllboardDetail(int aid) throws DataAccessException;
+
 	
 }

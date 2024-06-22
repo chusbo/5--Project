@@ -14,4 +14,7 @@ public interface SchoolController {
             HttpServletRequest request, HttpServletResponse response) throws Exception;
 	ModelAndView main(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	ModelAndView adminMain(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	ModelAndView board(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	ModelAndView boardDetail(int aid, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
 }

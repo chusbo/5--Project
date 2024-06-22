@@ -51,5 +51,15 @@
 	<select id="selectAlladminMain" resultMap="Result">
         SELECT * FROM board ORDER BY board_no DESC
     </select>
+    
+    <!-- 공지사항 -->
+    <select id="selectAllboard" resultMap="Result">
+        SELECT * FROM board ORDER BY board_no DESC
+    </select>
+    
+    <!-- 공지사항 정보 -->
+    <select id="selectAllboardDetail" resultMap="Result">
+        SELECT * FROM board WHERE board_no = #{boardNo}
+    </select>
 	
 </mapper>

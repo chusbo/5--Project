@@ -28,4 +28,16 @@ public class SchoolServiceImpl implements SchoolService {
     public List<SchoolVO> adminMains() throws Exception {
         return schoolDAO.selectAlladminMain();
     }
+
+	@Override
+	public List<SchoolVO> selectAllboard() throws Exception {
+		return schoolDAO.selectAllboard();
+	}
+
+	@Override
+	public SchoolVO selectAllboardDetail(int aid) throws Exception {
+		return schoolDAO.selectAllboardDetail(aid);
+	}
+
+	
 }
