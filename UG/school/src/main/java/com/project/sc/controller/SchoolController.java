@@ -14,4 +14,8 @@ public interface SchoolController {
 	ModelAndView addSubject(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 	ModelAndView deleteSubject(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+	ModelAndView myPage(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+	ModelAndView updateUser(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

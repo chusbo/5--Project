@@ -36,16 +36,16 @@
 		<result property="tc_status" column="tc_status" />
 	</resultMap>
 
-    <select id="selectAllSubs" resultMap="Result">
+     <select id="selectAllSubs" resultMap="Result">
         select s.sub_no, s.sub_name, t.tc_name 
         from subject s
-        join teacher t on s.sub_no = t.sub_no
+        left join teacher t on s.sub_no = t.sub_no
     </select>
 
     <select id="selectSubsByNos" parameterType="list" resultMap="Result">
         select s.sub_no, s.sub_name, t.tc_name 
         from subject s
-        join teacher t on s.sub_no = t.sub_no
+        left join teacher t on s.sub_no = t.sub_no
         where s.sub_no in 
         <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
             #{item}
@@ -53,10 +53,11 @@
     </select>
 
     <select id="selectAllSubNames" resultMap="Result">
-        select sub_no, sub_name from subject
+        select sub_no, sub_name 
+        from subject
     </select>
 
-    <insert id="insertSub" parameterType="com.project.sc.vo.SchoolVO">
+    <insert id="insertSub" parameterType="SchoolVO">
         insert into subject (sub_no, sub_name) values (#{sub_no}, #{sub_name})
     </insert>
 
@@ -64,4 +65,13 @@
         delete from subject where sub_no = #{sub_no}
     </delete>
 
+    <select id="selectUserById" parameterType="String" resultMap="Result">
+        select * from teacher where user_id = #{user_id}
+    </select>
+
+    <update id="updateUser" parameterType="SchoolVO">
+        update teacher
+        set tc_phone = #{tc_phone}, tc_addr = #{tc_addr}
+        where user_id = #{user_id}
+    </update>
 </mapper>

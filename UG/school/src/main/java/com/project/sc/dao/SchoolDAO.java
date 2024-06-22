@@ -11,11 +11,15 @@ import com.project.sc.vo.SchoolVO;
 public interface SchoolDAO {
 	List<SchoolVO> selectAllSubs() throws DataAccessException;
 
-	List<SchoolVO> selectSubsByNos(List<String> nos) throws DataAccessException;
+	List<SchoolVO> selectSubsByNos(List<String> subNos) throws DataAccessException;
 
 	List<SchoolVO> selectAllSubNames() throws DataAccessException;
 
-	int insertSub(SchoolVO sub) throws DataAccessException;
+	void insertSub(SchoolVO sub) throws DataAccessException;
 
-	int deleteSub(String no) throws DataAccessException;
+	void deleteSub(String subNo) throws DataAccessException;
+
+	SchoolVO selectUserById(String userId) throws DataAccessException;
+
+	void updateUser(SchoolVO user) throws DataAccessException;
 }
