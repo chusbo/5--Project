@@ -1,0 +1,55 @@
+1. SchoolApplication.java
+역할:
+이 클래스는 스프링 부트 애플리케이션의 진입점(Entry Point)입니다.
+main 메서드를 통해 애플리케이션을 시작하고, 스프링 컨텍스트를 초기화합니다.
+
+2. ServletInitializer.java
+역할:
+이 클래스는 서블릿 컨테이너를 초기화합니다.
+SpringBootServletInitializer를 상속받아 서블릿 환경에서 스프링 부트 애플리케이션을 설정할 수 있게 합니다.
+
+3. SchoolController.java
+역할:
+이 인터페이스는 학교 관련 기능을 위한 여러 메서드를 선언합니다.
+각 메서드는 다양한 HTTP 요청(GET, POST 등)에 응답하기 위한 것입니다.
+
+4. SchoolControllerImpl.java
+역할:
+SchoolController 인터페이스를 구현하는 클래스입니다.
+각 메서드는 HTTP 요청을 처리하고, 필요한 데이터를 서비스 레이어로부터 가져와서 ModelAndView 객체를 반환합니다.
+
+5. SchoolDAO.java
+역할:
+MyBatis를 사용하여 데이터베이스 작업을 수행하는 DAO(Data Access Object) 인터페이스입니다.
+@Mapper 어노테이션을 사용하여 MyBatis 매퍼 인터페이스로 지정되고, 스프링의 @Repository 어노테이션을 사용하여 빈으로 등록됩니다.
+
+6. SchoolService.java
+역할:
+비즈니스 로직을 처리하는 서비스 인터페이스입니다.
+다양한 기능을 정의하고 있으며, 구현체는 실제 비즈니스 로직을 수행합니다.
+
+7. SchoolServiceImpl.java
+역할:
+SchoolService 인터페이스를 구현하는 클래스입니다.
+DAO를 사용하여 데이터베이스와 상호 작용하고, 비즈니스 로직을 처리합니다.
+@Transactional 어노테이션을 통해 트랜잭션 관리가 이루어집니다.
+
+8. SchoolVO.java
+역할:
+데이터베이스의 레코드를 자바 객체로 매핑하는 VO(Value Object) 클래스입니다.
+다양한 속성에 대한 getter와 setter 메서드를 제공합니다.
+
+9. school.xml
+역할:
+MyBatis 매퍼 파일로, SQL 쿼리와 Java 메서드를 매핑합니다.
+resultMap을 통해 데이터베이스 칼럼과 VO 객체의 필드를 매핑합니다.
+다양한 SQL 쿼리를 정의하여 DAO 인터페이스의 메서드와 연결합니다.
+
+상관 관계
+컨트롤러와 서비스: SchoolControllerImpl는 클라이언트의 요청을 처리하고, 서비스 계층인 SchoolService를 호출하여 비즈니스 로직을 수행합니다.
+서비스와 DAO: SchoolServiceImpl는 데이터베이스 작업을 수행하기 위해 SchoolDAO를 호출합니다.
+DAO와 매퍼: SchoolDAO는 MyBatis 매퍼 파일(school.xml)에 정의된 SQL 쿼리를 사용하여 데이터베이스와 상호 작용합니다.
+VO 클래스: SchoolVO는 데이터베이스 레코드를 자바 객체로 매핑하는 데 사용됩니다.
+애플리케이션 초기화: SchoolApplication과 ServletInitializer는 스프링 부트 애플리케이션의 시작과 서블릿 컨테이너 초기화를 처리합니다.
+
+이러한 구조는 MVC 패턴을 따르며, 각 계층은 서로 명확하게 분리되어 있습니다. 컨트롤러는 HTTP 요청을 처리하고, 서비스는 비즈니스 로직을 수행하며, DAO는 데이터베이스와의 상호 작용을 담당합니다. VO 클래스는 데이터의 전달을 용이하게 합니다.

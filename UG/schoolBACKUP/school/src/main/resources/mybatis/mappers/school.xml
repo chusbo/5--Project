@@ -1,0 +1,128 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.sc.dao.SchoolDAO">
+	<resultMap id="Result" type="com.project.sc.vo.SchoolVO">
+		<result property="attendance_no" column="attendance_no" />
+		<result property="st_no" column="st_no" />
+		<result property="attendance_date" column="attendance_date" />
+		<result property="attendance_status" column="attendance_status" />
+		<result property="board_no" column="board_no" />
+		<result property="title" column="title" />
+		<result property="article" column="article" />
+		<result property="cre_date" column="cre_date" />
+		<result property="grade_no" column="grade_no" />
+		<result property="sub_no" column="sub_no" />
+		<result property="semester" column="semester" />
+		<result property="score" column="score" />
+		<result property="st_name" column="st_name" />
+		<result property="st_birth" column="st_birth" />
+		<result property="st_gender" column="st_gender" />
+		<result property="st_addr" column="st_addr" />
+		<result property="st_phone" column="st_phone" />
+		<result property="st_parent_phone" column="st_parent_phone" />
+		<result property="st_grade" column="st_grade" />
+		<result property="tc_no" column="tc_no" />
+		<result property="st_status" column="st_status" />
+		<result property="sub_name" column="sub_name" />
+		<result property="tc_name" column="tc_name" />
+		<result property="tc_birth" column="tc_birth" />
+		<result property="tc_gender" column="tc_gender" />
+		<result property="tc_addr" column="tc_addr" />
+		<result property="tc_phone" column="tc_phone" />
+		<result property="tc_hired" column="tc_hired" />
+		<result property="user_id" column="user_id" />
+		<result property="user_pwd" column="user_pwd" />
+		<result property="user_grant" column="user_grant" />
+		<result property="tc_status" column="tc_status" />
+	</resultMap>
+
+	<!-- 모든 과목과 해당 교사의 이름을 선택하는 쿼리 -->
+	<select id="selectAllSubs" resultMap="Result">
+		select subject.sub_no, subject.sub_name, teacher.tc_name
+		from subject
+		left join teacher on subject.sub_no = teacher.sub_no
+	</select>
+
+	<!-- 주어진 과목 번호 목록에 해당하는 과목과 교사의 이름을 선택하는 쿼리 -->
+	<select id="selectSubsByNos" parameterType="list" resultMap="Result"> select
+		subject.sub_no, subject.sub_name, teacher.tc_name from subject left join
+		teacher on subject.sub_no = teacher.sub_no where subject.sub_no in <foreach
+			item="item" index="index" collection="list" open="(" separator=","
+			close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<!-- 모든 과목의 번호와 이름을 선택하는 쿼리 -->
+	<select id="selectAllSubNames" resultMap="Result">
+		select sub_no, sub_name
+		from subject
+	</select>
+
+	<!-- 새로운 과목을 추가하는 쿼리 -->
+	<insert id="insertSub" parameterType="com.project.sc.vo.SchoolVO">
+		insert into subject (sub_no, sub_name)
+		values (#{sub_no}, #{sub_name})
+	</insert>
+
+	<!-- 주어진 과목 번호에 해당하는 과목을 삭제하는 쿼리 -->
+	<delete id="deleteSub" parameterType="String">
+		delete from subject
+		where sub_no = #{sub_no}
+	</delete>
+
+	<!-- 주어진 사용자 ID에 해당하는 사용자의 모든 정보를 선택하는 쿼리 -->
+	<select id="selectUserById" parameterType="String" resultMap="Result">
+		select *
+		from teacher
+		where user_id = #{user_id}
+	</select>
+
+	<!-- 주어진 사용자 ID에 해당하는 사용자의 전화번호와 주소를 업데이트하는 쿼리 -->
+	<update id="updateUser" parameterType="com.project.sc.vo.SchoolVO">
+		update teacher
+		set tc_phone = #{tc_phone}, tc_addr = #{tc_addr}
+		where user_id = #{user_id}
+	</update>
+
+	<!-- 모든 학년과 과목별 평균 점수를 선택하는 쿼리 -->
+	<select id="selectGradeAverages" resultType="map">
+		select student.st_grade as grade, subject.sub_name as subject,
+		avg(grade.score) as avg_score
+		from grade
+		join student on grade.st_no = student.st_no
+		join subject on grade.sub_no = subject.sub_no
+		group by student.st_grade, subject.sub_name
+		order by student.st_grade, subject.sub_name
+	</select>
+
+	<!-- 주어진 학기에 해당하는 학년과 과목별 평균 점수를 선택하는 쿼리 -->
+	<select id="getAvgScoresBySem" resultType="map">
+		select student.st_grade as grade, subject.sub_name as subject,
+		avg(grade.score) as avg_score
+		from grade
+		join student on grade.st_no = student.st_no
+		join subject on grade.sub_no = subject.sub_no
+		where grade.semester = #{semester}
+		group by student.st_grade, subject.sub_name
+		order by student.st_grade, subject.sub_name
+	</select>
+
+	<!-- 학생들의 학년별 등수와 평균 점수를 선택하는 쿼리 -->
+	<select id="getRanks" resultType="map">
+		select
+		student.st_grade as grade,
+		student.st_name as name,
+		avg(grade.score) as avg_score,
+		rank() over (partition by student.st_grade order by avg(grade.score)
+		desc) as rank_value
+		from
+		grade
+		join
+		student on grade.st_no = student.st_no
+		group by
+		student.st_grade, student.st_name
+		order by
+		student.st_grade, rank_value
+	</select>
+
+</mapper>
