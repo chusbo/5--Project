@@ -23,12 +23,14 @@ public class SchoolControllerImpl implements SchoolController {
 	@Autowired
 	private SchoolService schoolService;
 
+	// 모든 과목 목록을 가져와서 뷰에 전달
 	@Override
 	@GetMapping("/listSubjects.do")
 	public ModelAndView listSubjects(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		return new ModelAndView("/subList", "subsList", schoolService.getAllSubs());
 	}
 
+	// 특정 과목을 검색하여 결과를 뷰에 전달
 	@Override
 	@GetMapping("/searchSubjects.do")
 	public ModelAndView searchSubjects(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -41,12 +43,14 @@ public class SchoolControllerImpl implements SchoolController {
 				.addObject("selectedNos", nos != null ? Arrays.asList(nos) : null);
 	}
 
+	// 과목 추가 폼을 보여주는 뷰를 반환
 	@Override
 	@GetMapping("/addSubForm.do")
 	public ModelAndView addSubjectForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		return new ModelAndView("/addSubForm");
 	}
 
+	// 새로운 과목을 추가하고 과목 목록 페이지로 리다이렉트
 	@Override
 	@PostMapping("/addSub.do")
 	public ModelAndView addSubject(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -57,6 +61,7 @@ public class SchoolControllerImpl implements SchoolController {
 		return new ModelAndView("redirect:/listSubjects.do");
 	}
 
+	// 과목을 삭제하고 과목 목록 페이지로 리다이렉트
 	@Override
 	@PostMapping("/deleteSub.do")
 	public ModelAndView deleteSubject(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -64,12 +69,14 @@ public class SchoolControllerImpl implements SchoolController {
 		return new ModelAndView("redirect:/listSubjects.do");
 	}
 
+	// 특정 사용자의 정보를 가져와서 뷰에 전달
 	@Override
 	@GetMapping("/myPage.do")
 	public ModelAndView myPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		return new ModelAndView("/myPage", "user", schoolService.getUserById(request.getParameter("user_id")));
 	}
 
+	// 사용자의 정보를 업데이트하고 결과를 뷰에 전달
 	@Override
 	@PostMapping("/updateUser.do")
 	public ModelAndView updateUser(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -81,6 +88,7 @@ public class SchoolControllerImpl implements SchoolController {
 		return new ModelAndView("/myPage", "user", user).addObject("updateMessage", "정보가 변경되었습니다.");
 	}
 
+	// 특정 학기의 평균 점수를 가져와서 학년별로 그룹화하여 뷰에 전달
 	@Override
 	@GetMapping("/grades.do")
 	public ModelAndView showGrades(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -92,6 +100,7 @@ public class SchoolControllerImpl implements SchoolController {
 		return new ModelAndView("gradesList", "gradesList", groupedData).addObject("selectedSemester", semester);
 	}
 
+	// 학생들의 등수를 학년별로 그룹화하여 뷰에 전달
 	@GetMapping("/ranks.do")
 	public ModelAndView showRanks(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		List<Map<String, Object>> ranksList = schoolService.getRanks();

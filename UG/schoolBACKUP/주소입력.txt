@@ -1,0 +1,6 @@
+http://localhost:8080/searchSubjects.do 교과 목록 및 검색(사용자용)
+http://localhost:8080/listSubjects.do 교과 목록 및 삭제(관리자용)
+http://localhost:8080/addSubForm.do 교과 등록(관리자용)
+http://localhost:8080/myPage.do?user_id=??? 마이페이지 접속(정보 변경)
+http://localhost:8080/grades.do 학년 별 과목 평균
+http://localhost:8080/ranks.do 학년 별 전교 석차
