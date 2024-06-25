@@ -14,3 +14,24 @@ http://localhost:8080/myPage.do?user_id=??? 마이페이지 접속(정보 변경
 http://localhost:8080/grades.do 학년 별 과목 평균
 http://localhost:8080/ranks.do 학년 별 전교 석차
 http://localhost:8080/searchAttendance.do 기간 별 출결 검색
+
+선생 목록 조회
+http://localhost:8080/tcList.do
+
+선생 상세 정보 조회(선생 번호 입력)
+http://localhost:8080/tcInfo.do?tcNo=
+
+담임학급 학생 조회(선생 번호 입력)
+http://localhost:8080/findByTcNo.do
+
+담당 과목 성적 조회(선생 번호 입력)
+http://localhost:8080/subjectGrades.do?tcNo=
+
+담당 과목 성적 입력
+http://localhost:8080/insertSubjectGrades.do
+
+담당 과목 성적 수정
+http://localhost:8080/updateSubjectGrades.do
+
+신교교사등록
+http://localhost:8080/tcAdd.do
