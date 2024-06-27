@@ -7,7 +7,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>학생 정보</title>
+    <title>성적 정보</title>
 	<style>
 	    body {
 	        font-family: Arial, sans-serif;
@@ -33,7 +33,6 @@
 	    th {
 	        background-color: #f2f2f2;
 	        color: #333;
-			text-align: center;
 	    }
 	    tr:nth-child(even) {
 	        background-color: #f9f9f9;
@@ -41,32 +40,33 @@
 	    tr:nth-child(odd) {
 	        background-color: #ffffff;
 	    }
-
 	</style>    
 </head>
 <body>
     <jsp:include page="header.jsp" />
-	
-    <h1>학생 정보</h1>
+		<c:if test="${not empty listGrade}">
+		    <h1>${listGrade[0].st_name} 학생 성적 정보</h1>
+		</c:if>
     <table>
         <thead>
-            <tr style="text-align: center;">
-                <th>이름</th>
-                <th>생년월일</th>
-                <th>성별</th>
-                <th>학급</th>
+            <tr>
+				<th>학년-학기</th>
+                <th>과목</th>
+                <th>성적</th>
             </tr>
         </thead>
         <tbody>
-        <c:forEach var="st" items="${stList}">
+        <c:forEach var="grade" items="${listGrade}">
             <tr>
-				<td><a href="<c:url value='/stInfo.do'/>?stNo=${st.st_no}" style="text-decoration:none;">${st.st_name}</a></td>
-                <td>${st.st_birth}</td>
-                <td>${st.st_gender}</td>
-                <td>${st.st_grade}</td>
+				<td>${grade.semester}</td>
+                <td>${grade.sub_name}</td>
+                <td>${grade.score}</td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
+	<div style="text-align:center;">
+	    <a href="${contextPath}/stInfo.do?stNo=${listGrade[0].st_no}"><input type="button" value="돌아가기"></a>
+	</div>
 </body>
 </html>

@@ -22,15 +22,15 @@
 	            padding: 20px;
 	            border-radius: 8px;
 	        }
-	        .ul {
+	        ul {
 	            list-style-type: none;
 	            padding: 0;
 	        }
-	        .ul li {
+	        li {
 	            padding: 10px 0;
 	            border-bottom: 1px solid #ddd;
 	        }
-	        .ul li strong {
+	        li strong {
 	            width: 100px;
 	            display: inline-block;
 	        }
@@ -41,12 +41,16 @@
 	    <jsp:include page="header.jsp" />
 	    <div class="container">
 	        <h1>공지사항 상세정보</h1>
-			<ul class="ul">
-			          <li>제목: ${boardDetail.title}</li>
-			          <li>내용: ${boardDetail.article}</li>
-			          <li>작성일자: ${boardDetail.cre_date}</li>
-			</ul>
+	        <ul>
+	            <li><strong>제목:</strong> ${adminBoardDetail.title}</li>
+	            <li><strong>내용:</strong> ${adminBoardDetail.article}</li>
+	            <li><strong>작성일자:</strong> ${adminBoardDetail.cre_date}</li>
+	        </ul>
 	    </div>
-
+		<div style="text-align:center;">
+		<form action="${pageContext.request.contextPath}/delete/${adminBoardDetail.board_no}" method="get" onsubmit="return confirm('정말로 삭제하시겠습니까?');">
+		    <button type="submit">삭제</button>
+		</form>
+		</div>
 	</body>
 	</html>

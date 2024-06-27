@@ -7,7 +7,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>학생 정보</title>
+    <title>선생 목록 조회</title>
 	<style>
 	    body {
 	        font-family: Arial, sans-serif;
@@ -33,7 +33,6 @@
 	    th {
 	        background-color: #f2f2f2;
 	        color: #333;
-			text-align: center;
 	    }
 	    tr:nth-child(even) {
 	        background-color: #f9f9f9;
@@ -41,29 +40,27 @@
 	    tr:nth-child(odd) {
 	        background-color: #ffffff;
 	    }
-
 	</style>    
 </head>
 <body>
     <jsp:include page="header.jsp" />
-	
-    <h1>학생 정보</h1>
+    <h1>선생 목록 조회</h1>
     <table>
         <thead>
-            <tr style="text-align: center;">
+            <tr>
                 <th>이름</th>
-                <th>생년월일</th>
+                <th>과목</th>
                 <th>성별</th>
-                <th>학급</th>
+                <th>휴대폰 번호</th>
             </tr>
         </thead>
         <tbody>
-        <c:forEach var="st" items="${stList}">
+        <c:forEach var="tc" items="${adminTcList}">
             <tr>
-				<td><a href="<c:url value='/stInfo.do'/>?stNo=${st.st_no}" style="text-decoration:none;">${st.st_name}</a></td>
-                <td>${st.st_birth}</td>
-                <td>${st.st_gender}</td>
-                <td>${st.st_grade}</td>
+				<td><a href="<c:url value='/adminTcInfo.do'/>?tcNo=${tc.tc_no}">${tc.tc_name}</a></td>
+                <td>${tc.sub_name}</td>
+                <td>${tc.tc_gender}</td>
+                <td>${tc.tc_phone}</td>
             </tr>
         </c:forEach>
         </tbody>

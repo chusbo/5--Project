@@ -14,10 +14,10 @@ public class SchoolVO {
 	private String title;				//공지사항-글제목
 	private String article;				//공지사항-글내용
 	private Date cre_date;				//공지사항-작성시간
-	private String grade_no;			//성적-번호
+	private int grade_no;				//성적-번호
 	private String sub_no;				//성적-과목번호
-	private String senester;			//성적-학년학기
-	private String score;				//성적-점수
+	private String semester;			//성적-학년학기
+	private int score;					//성적-점수
 	private String st_name;				//학생-이름
 	private String st_birth;			//학생-생년월일
 	private String st_gender;			//학생-성별
@@ -25,19 +25,19 @@ public class SchoolVO {
 	private String st_phone;			//학생-전화번호
 	private String st_parent_phone;		//학생-학부모 전화번호
 	private String st_grade;			//학생-학년
-	private String tc_no;				//학생-담임선생님
-	private String st_statuts;			//학생-상태
+	private String tc_no;				//학생-담임교사
+	private String st_status;			//학생-상태
 	private String sub_name;			//교과-이름
-	private String tc_name;				//선생-이름
-	private String tc_birth;			//선생-생년월일
-	private String tc_gender;			//선생-생별
-	private String tc_addr;				//선생-주소
-	private String tc_phone;			//선생-전화번호
-	private Date tc_hired;				//선생-입사일
+	private String tc_name;				//교사-이름
+	private String tc_birth;			//교사-생년월일
+	private String tc_gender;			//교사-생별
+	private String tc_addr;				//교사-주소
+	private String tc_phone;			//교사-전화번호
+	private Date tc_hired;				//교사-입사일
 	private String user_id;				//사용자 아이디
 	private String user_pwd;			//사용자 비밀번호
 	private String user_grant;			//사용자 권한
-	private String tc_status;			//선생-상태
+	private String tc_status;			//교사-상태
 
 	
 	public String getAttendance_no() {
@@ -104,11 +104,11 @@ public class SchoolVO {
 		this.cre_date = cre_date;
 	}
 
-	public String getGrade_no() {
+	public int getGrade_no() {
 		return grade_no;
 	}
 
-	public void setGrade_no(String grade_no) {
+	public void setGrade_no(int grade_no) {
 		this.grade_no = grade_no;
 	}
 
@@ -120,19 +120,19 @@ public class SchoolVO {
 		this.sub_no = sub_no;
 	}
 
-	public String getSenester() {
-		return senester;
+	public String getSemester() {
+		return semester;
 	}
 
-	public void setSenester(String senester) {
-		this.senester = senester;
+	public void setSemester(String semester) {
+		this.semester = semester;
 	}
 
-	public String getScore() {
+	public int getScore() {
 		return score;
 	}
 
-	public void setScore(String score) {
+	public void setScore(int score) {
 		this.score = score;
 	}
 
@@ -201,11 +201,11 @@ public class SchoolVO {
 	}
 
 	public String getSt_statuts() {
-		return st_statuts;
+		return st_status;
 	}
 
 	public void setSt_statuts(String st_statuts) {
-		this.st_statuts = st_statuts;
+		this.st_status = st_statuts;
 	}
 
 	public String getSub_name() {
